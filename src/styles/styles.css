@@ -1,0 +1,82 @@
+/* Сброс стилей */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 1100px;
+  margin: 0 auto;
+  font-family: Raleway, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  width: 100%;
+}
+
+/* MAIN */
+/* Таблица */
+.container {
+    display: flex;
+    padding: 20px;
+    /* width: 100%; */
+}
+
+.table {
+    flex: 7;
+    padding: 10px;
+}
+
+.table__user {
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.sidebar {
+    flex: 3;
+    padding: 10px;
+}
+/* Пагинатор */
+.pagination {
+    margin-block-start: 10px;
+}
+
+.pagination__button {
+    display: flex;
+    row-gap: 5px;
+}
+/* Сайдбар */
+
+/* .sidebar__heading {
+} */
+
+.sidebar__content {
+    padding-block-start: 10px;
+}
