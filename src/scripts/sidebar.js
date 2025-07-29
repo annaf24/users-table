@@ -6,8 +6,12 @@ const sidebarContent = sidebar.querySelector('.sidebar__content');
 
 export async function renderSidebar(userId) {
     try {
-        const posts = await loadUserPosts(userId)
+        const posts = await loadUserPosts(userId);
         sidebarContent.innerHTML = '';
+
+        if (!posts.length) {
+            sidebarContent.textContent = 'No posts found';
+        }
 
         posts.forEach(post => {
             const article = document.createElement('article');
@@ -28,5 +32,4 @@ export async function renderSidebar(userId) {
     } catch (error) {
         console.error(error);
     }
-
 }

@@ -12,4 +12,4 @@ currentUsers = data.users;
 
 console.log(loadUserPosts(2));
 renderTable(currentUsers);
-renderSidebar(1);
+renderSidebar();

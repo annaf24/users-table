@@ -1,3 +1,5 @@
+import { renderSidebar } from "./sidebar.js";
+
 const table = document.querySelector('.table__user');
 const tbody = table.querySelector('tbody');
 
