@@ -23,7 +23,7 @@ export async function loadUserPosts(userId) {
     try {
         const responce = await fetch(`${API}/${userId}/posts`);
         const data = await responce.json();
-        
+
         return data.posts;
     } catch (error) {
         console.error(error);
