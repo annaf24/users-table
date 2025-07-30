@@ -1,15 +1,33 @@
 import { loadUsersData, loadUserPosts } from "./api.js";
+import { renderPagination } from "./pagination.js";
 import { renderSidebar } from "./sidebar.js";
 import { renderTable } from "./table.js";
 
-const data = await loadUsersData();
-
+const LIMIT = 10;
 let currentUsers = [];
-currentUsers = data.users;
-// console.log(currentUsers)
+let currentPage = 0;
 
-// loadUsersData();
+async function initialization() {
+    await renderData(currentPage);
+}
 
-console.log(loadUserPosts(2));
-renderTable(currentUsers);
-renderSidebar();
+async function renderData(page) {
+    try {
+        const SKIP = page * LIMIT;
+        console.log("crbg"+SKIP);
+        const data = await loadUsersData(SKIP, LIMIT);
+        currentUsers = data.users;
+        renderTable(currentUsers);
+        console.log(LIMIT);
+        renderPagination({total: data.total, limit: LIMIT, currentPage: page}, onPageChange);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function onPageChange(page) {
+    currentPage = page;
+    renderData(page);
+}
+
+initialization();

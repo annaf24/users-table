@@ -1,11 +1,8 @@
 const API = 'https://dummyjson.com/users'
 
-const SKIP = 0;
-const LIMIT = 10;
-
-export async function loadUsersData() {
+export async function loadUsersData(skip = 0, limit = 10) {
     try {
-        const url = `${API}?limit=${LIMIT}&skip=${SKIP}&select=id,firstName,lastName,age,email`;
+        const url = `${API}?limit=${limit}&skip=${skip}&select=id,firstName,lastName,age,email`;
 
         const responce = await fetch(url);
         const data = await responce.json();

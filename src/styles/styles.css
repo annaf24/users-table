@@ -51,8 +51,16 @@ img {
     padding: 10px;
 }
 
+/* caption {
+  font-size: ;
+} */
+
 .table__user {
     border-collapse: collapse;
+}
+
+tbody {
+  cursor: pointer;
 }
 th, td {
     border: 1px solid #000000;
@@ -66,11 +74,12 @@ th, td {
 /* Пагинатор */
 .pagination {
     margin-block-start: 10px;
+    display: flex;
+    gap: 5px;
 }
 
 .pagination__button {
-    display: flex;
-    row-gap: 5px;
+    cursor: pointer;
 }
 /* Сайдбар */
 
@@ -79,4 +88,17 @@ th, td {
 
 .sidebar__content {
     padding-block-start: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
+
+.sidebar__post {
+  
+}
+.sidebar__post-title {
+  margin-block-end: 5px;
+}
+/* .sidebar__post-body {
+  
+} */
