@@ -102,3 +102,8 @@ th, td {
 /* .sidebar__post-body {
   
 } */
+
+.pagination__button.active {
+  opacity: 0.6;
+  border: none;
+}
