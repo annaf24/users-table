@@ -3,7 +3,7 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
     pagination.innerHTML = '';
 
     const totalPages = Math.ceil(total / limit);
-    const maxVisiblePages = 5;
+    const DEFAULT_VISIBLE_PAGES = 5;
 
     const createButton = (text, index, isActive = false) => {
         const button = document.createElement('button');
@@ -23,12 +23,12 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
         return span;
     };
 
-    let start = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 0);
-    let end = start + maxVisiblePages;
+    let startPage = Math.max(currentPage - Math.floor(DEFAULT_VISIBLE_PAGES / 2), 0);
+    let endPage = startPage + DEFAULT_VISIBLE_PAGES;
 
-    if (end > totalPages) {
-        end = totalPages;
-        start = Math.max(end - maxVisiblePages, 0);
+    if (endPage > totalPages) {
+        endPage = totalPages;
+        startPage = Math.max(endPage - DEFAULT_VISIBLE_PAGES, 0);
     }
 
     if (currentPage > 1) {
@@ -41,13 +41,13 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
         pagination.appendChild(prevButton);
     }
 
-    for (let i = start; i < end; i++) {
+    for (let i = startPage; i < endPage; i++) {
         const button = createButton(i + 1, i, i === currentPage);
         pagination.appendChild(button);
     }
 
-    if (end < totalPages) {
-        if (end < totalPages - 1) {
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
             pagination.appendChild(createDots());
         }
         pagination.appendChild(createButton(totalPages, totalPages - 1));
