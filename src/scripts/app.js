@@ -1,33 +1,46 @@
-import { loadUsersData, loadUserPosts } from "./api.js";
+import { loadUsersData } from "./api.js";
 import { renderPagination } from "./pagination.js";
-import { renderSidebar } from "./sidebar.js";
-import { renderTable } from "./table.js";
+import { getSortedUsers, renderTable, sortTable } from "./table.js";
 
 const LIMIT = 10;
-let currentUsers = [];
+let allUsers = [];
 let currentPage = 0;
 
 async function initialization() {
-    await renderData(currentPage);
-}
-
-async function renderData(page) {
     try {
-        const SKIP = page * LIMIT;
-        console.log("crbg"+SKIP);
-        const data = await loadUsersData(SKIP, LIMIT);
-        currentUsers = data.users;
-        renderTable(currentUsers);
-        console.log(LIMIT);
-        renderPagination({total: data.total, limit: LIMIT, currentPage: page}, onPageChange);
+        const dataTotal = await loadUsersData(0,0);
+        const total = dataTotal.total;
+
+        const data = await loadUsersData(0, total);
+        allUsers = data.users;
+
+        sortTable(allUsers, onSortChange);
+        renderPagination({
+            total: allUsers.lenght,
+            limit: LIMIT,
+            currentPage
+        }, onPageChange);
+        renderPage();
+
     } catch (error) {
         console.error(error);
     }
 }
 
+function renderPage() {
+    const startOfPage = currentPage * LIMIT;
+    const endOfPage = startOfPage + LIMIT;
+    const sortedUsers = getSortedUsers();
+    renderTable(sortedUsers.slice(startOfPage, endOfPage));
+}
+
 function onPageChange(page) {
     currentPage = page;
-    renderData(page);
+    renderPage();
+}
+
+function onSortChange() {
+    renderPage();
 }
 
 initialization();
