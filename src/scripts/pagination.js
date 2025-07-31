@@ -3,7 +3,6 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
     pagination.innerHTML = '';
 
     const totalPages = Math.ceil(total / limit);
-    console.log(totalPages);
     const DEFAULT_VISIBLE_PAGES = 5;
 
     const createButton = (text, index, isActive = false) => {
@@ -16,6 +15,10 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
         button.addEventListener('click', () => onPageChange(index));
         return button;
     }
+    
+    const addButton = (text, index, isActive = false) => {
+        pagination.appendChild(createButton(text, index, isActive));
+    }
 
      const createDots = () => {
         const span = document.createElement('span');
@@ -25,22 +28,11 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
     };
 
     let startPage = Math.max(currentPage - Math.floor(DEFAULT_VISIBLE_PAGES / 2), 0);
-    let endPage = startPage + DEFAULT_VISIBLE_PAGES;
+    const endPage = Math.min(Math.max(startPage + DEFAULT_VISIBLE_PAGES, DEFAULT_VISIBLE_PAGES), totalPages);
 
-    if (endPage > totalPages) {
-        endPage = totalPages;
-        startPage = Math.max(endPage - DEFAULT_VISIBLE_PAGES, 0);
-    }
-
-    if (currentPage > 1) {
-        const toFirstPageButton = createButton('<<', 0)
-        pagination.appendChild(toFirstPageButton);
-    }
-
-    if (currentPage > 0) {
-        const prevButton = createButton('<', currentPage - 1)
-        pagination.appendChild(prevButton);
-    }
+    if (currentPage > 1) addButton('<<', 0);
+    if (currentPage > 0) addButton('<', currentPage - 1);
+    
 
     for (let i = startPage; i < endPage; i++) {
         const button = createButton(i + 1, i, i === currentPage);
@@ -51,13 +43,10 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
         if (endPage < totalPages - 1) {
             pagination.appendChild(createDots());
         }
-        pagination.appendChild(createButton(totalPages, totalPages - 1));
+        addButton(totalPages, totalPages - 1);
     }
 
-    if (currentPage < totalPages - 1) {
-        const nextButton = createButton('>', currentPage + 1)
-        pagination.appendChild(nextButton);
-    }
+    if (currentPage < totalPages - 1) addButton('>', currentPage + 1);
 }
 
 
