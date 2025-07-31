@@ -5,25 +5,27 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0 auto;
-  font-family: Raleway, sans-serif;
-  width: 100%;
-}
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-p,
+p,пше
 ul,
 ol,
 li,
 blockquote {
   margin: 0;
   padding: 0;
+}
+
+/* Общий контейнер */
+body {
+  margin: 0;
+  font-family: Raleway, sans-serif;
+  color: #333333;
+  min-height: 100vh;
 }
 
 
@@ -34,29 +36,35 @@ blockquote {
   grid-template-areas:
   "table sidebar"
   "pagination sidebar";
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: auto auto;
   gap: 20px;
+  padding: 24px;
   margin: 0 auto;
-  padding: 20px;
-  
 }
 
-
-/* caption {
-  font-size: ;
-} */
+@media (max-width: 900px) {
+  .container {
+    grid-template-areas:
+      "table"
+      "pagination"
+      "sidebar";
+    grid-template-columns: 1fr;
+  }
+}
 
 .table__user {
   grid-area: table;
   width: 100%;
   border-collapse: collapse;
+  margin-block-end: 20px;
 }
 
 .table__user caption {
   font-size: 24px;
   font-weight: bold;
   margin-block-end: 10px;
+  text-align: start;
 }
 
 tbody {
@@ -64,16 +72,16 @@ tbody {
 }
 
 td {
-    padding: 10px;
-    border-bottom: 1px solid rgb(220, 220, 220);
+  border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 th {
   background-color: rgb(154, 205, 50);
+  text-align: start;
 }
 
 th, td {
-    padding: 10px;
+  padding: 10px;
 }
 
 tr:hover {
@@ -84,18 +92,18 @@ tr:active {
   background-color: rgb(204, 232, 123);
 }
 
-.sidebar {
-  grid-area: sidebar;
-}
 /* Пагинатор */
 .pagination {
   grid-area: pagination;
   display: flex;
+  align-items: flex-start;
   gap: 5px;
 }
 
 .pagination__button {
+  padding: 8px 12px;
   font-size: 14px;
+  color: #FFFFFF;
   cursor: pointer;
   border: none;
   background-color: rgb(100, 149, 237);
@@ -107,38 +115,29 @@ tr:active {
 
 .pagination__button:active {
   background-color: rgb(30, 144, 255);
+  color: rgb(51, 51, 51);
 }
-
 
 .pagination__button.active {
   background-color: rgba(100, 148, 237, 0.4);
   cursor: default;
 }
 
-
-
 /* Сайдбар */
-
 .sidebar {
+  grid-area: sidebar;
+  width: 100%;
 }
-
 .sidebar__heading {
   margin-block-end: 10px;
 }
 
 .sidebar__content {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    padding-block: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 }
 
-/* .sidebar__post {
-  
-} */
 .sidebar__post-title {
+  margin-block-end: 10px;
 }
-/* .sidebar__post-body {
-  
-} */
-
