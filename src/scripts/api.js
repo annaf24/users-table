@@ -32,7 +32,7 @@ export async function loadUserPosts(userId) {
 
 export async function loadUserById(userId) {
     try {
-        const response = await fetch(`${API}/users/${userId}`);
+        const response = await fetch(`${API}/users/${userId}?select=firstName,lastName`);
         if (!response.ok) throw new Error('User not found');
         const user = await response.json();
         return user;

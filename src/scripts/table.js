@@ -24,7 +24,6 @@ export function sortTable(users, callback) {
                 currentSort = { field, direction: 'asc' };
             }
             
-            // Удаляем старые стрелки
             theaders.forEach(h => {
                 const arrow = h.querySelector('.sort-arrow');
                 if (arrow) { 
@@ -32,7 +31,6 @@ export function sortTable(users, callback) {
                 }
             });
             
-            // Добавляем новую стрелку
             const arrow = document.createElement('span');
             arrow.className = 'sort-arrow';
             arrow.textContent = currentSort.direction === 'asc' ? ' ▲' : ' ▼';
