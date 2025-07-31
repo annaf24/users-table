@@ -6,9 +6,9 @@
 }
 
 body {
-  width: 1100px;
   margin: 0 auto;
   font-family: Raleway, sans-serif;
+  width: 100%;
 }
 
 h1,
@@ -26,84 +26,119 @@ blockquote {
   padding: 0;
 }
 
-li {
-  list-style-type: none;
-}
-
-a {
-  color: inherit;
-}
-
-img {
-  width: 100%;
-}
 
 /* MAIN */
 /* Таблица */
 .container {
-    display: flex;
-    padding: 20px;
-    /* width: 100%; */
+  display: grid;
+  grid-template-areas:
+  "table sidebar"
+  "pagination sidebar";
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  
 }
 
-.table {
-    flex: 7;
-    padding: 10px;
-}
 
 /* caption {
   font-size: ;
 } */
 
 .table__user {
-    border-collapse: collapse;
+  grid-area: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table__user caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-block-end: 10px;
 }
 
 tbody {
   cursor: pointer;
 }
-th, td {
-    border: 1px solid #000000;
+
+td {
     padding: 10px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+th {
+  background-color: rgb(154, 205, 50);
+}
+
+th, td {
+    padding: 10px;
+}
+
+tr:hover {
+  background-color: rgb(230, 245, 200);
+}
+
+tr:active {
+  background-color: rgb(204, 232, 123);
 }
 
 .sidebar {
-    flex: 3;
-    padding: 10px;
+  grid-area: sidebar;
 }
 /* Пагинатор */
 .pagination {
-    margin-block-start: 10px;
-    display: flex;
-    gap: 5px;
+  grid-area: pagination;
+  display: flex;
+  gap: 5px;
 }
 
 .pagination__button {
-    cursor: pointer;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(100, 149, 237);
 }
+
+.pagination__button:hover {
+  background-color: rgb(65, 105, 225);
+}
+
+.pagination__button:active {
+  background-color: rgb(30, 144, 255);
+}
+
+
+.pagination__button.active {
+  background-color: rgba(100, 148, 237, 0.4);
+  cursor: default;
+}
+
+
+
 /* Сайдбар */
 
-/* .sidebar__heading {
-} */
+.sidebar {
+}
+
+.sidebar__heading {
+  margin-block-end: 10px;
+}
 
 .sidebar__content {
-    padding-block-start: 10px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    padding-block: 10px;
 }
 
 /* .sidebar__post {
   
 } */
 .sidebar__post-title {
-  margin-block-end: 5px;
 }
 /* .sidebar__post-body {
   
 } */
 
-.pagination__button.active {
-  opacity: 0.6;
-  border: none;
-}

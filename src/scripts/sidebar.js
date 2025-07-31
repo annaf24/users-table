@@ -1,4 +1,4 @@
-import { loadUserPosts } from "./api.js";
+import { loadUserById, loadUserPosts } from "./api.js";
 
 const sidebar = document.querySelector('.sidebar');
 const sidebarHeading = sidebar.querySelector('.sidebar__heading');
@@ -6,7 +6,13 @@ const sidebarContent = sidebar.querySelector('.sidebar__content');
 
 export async function renderSidebar(userId) {
     try {
-        const posts = await loadUserPosts(userId);
+        const [posts, user] = await Promise.all([
+            loadUserPosts(userId),
+            loadUserById(userId),
+        ]);
+
+        sidebarHeading.textContent = `Posts by ${user.firstName} ${user.lastName}`;
+
         sidebarContent.innerHTML = '';
 
         if (!posts.length) {
