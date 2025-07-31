@@ -16,9 +16,9 @@ async function initialization() {
 
         sortTable(allUsers, onSortChange);
         renderPagination({
-            total: allUsers.lenght,
+            total: allUsers.length,
             limit: LIMIT,
-            currentPage
+            currentPage,
         }, onPageChange);
         renderPage();
 
@@ -37,6 +37,11 @@ function renderPage() {
 function onPageChange(page) {
     currentPage = page;
     renderPage();
+    renderPagination({
+            total: allUsers.length,
+            limit: LIMIT,
+            currentPage,
+    }, onPageChange);
 }
 
 function onSortChange() {

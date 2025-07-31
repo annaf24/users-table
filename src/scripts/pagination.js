@@ -3,6 +3,7 @@ export function renderPagination({total, limit, currentPage}, onPageChange) {
     pagination.innerHTML = '';
 
     const totalPages = Math.ceil(total / limit);
+    console.log(totalPages);
     const DEFAULT_VISIBLE_PAGES = 5;
 
     const createButton = (text, index, isActive = false) => {
